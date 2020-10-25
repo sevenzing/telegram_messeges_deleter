@@ -1,0 +1,14 @@
+version: '3.6'
+
+services:
+    bot:
+        build: .
+        depends_on: 
+            - redis
+    
+    redis:
+        image: redis:4.0.5-alpine
+        command: ["redis-server", "--appendonly", "yes", "--port", "5432"]
+        hostname: redis
+        volumes:
+            - ./bot/storage/redis/data:/data
